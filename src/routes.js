@@ -1,4 +1,8 @@
-const { errorPathHandler, addBookHandler } = require("./handler");
+const {
+  errorPathHandler,
+  addBookHandler,
+  getAllBookHandler,
+} = require("./handler");
 
 const routes = [
   {
@@ -7,9 +11,14 @@ const routes = [
     handler: errorPathHandler,
   },
   {
-    method: "Post",
+    method: "POST",
     path: "/books",
     handler: addBookHandler,
+  },
+  {
+    method: "GET",
+    path: "/books",
+    handler: getAllBookHandler,
   },
 ];
 

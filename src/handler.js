@@ -80,4 +80,19 @@ const addBookHandler = (req, h) => {
   return res;
 };
 
-module.exports = { errorPathHandler, addBookHandler };
+const getAllBookHandler = (req, h) => {
+  const res = h.response({
+    status: "success",
+    data: {
+      books: books.map((book) => ({
+        id: book.id,
+        name: book.name,
+        publisher: book.publisher,
+      })),
+    },
+  });
+  res.code(200);
+  return res;
+};
+
+module.exports = { errorPathHandler, addBookHandler, getAllBookHandler };
