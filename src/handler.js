@@ -81,6 +81,61 @@ const addBookHandler = (req, h) => {
 };
 
 const getAllBookHandler = (req, h) => {
+  const { name, reading, finished } = req.query;
+  if (name) {
+    const query = books.filter((book) => {
+      const reg = new RegExp(name, "ig"); // i=insensitive case, g=globa
+      return reg.test(book.name);
+    });
+    const res = h.response({
+      status: "success",
+      data: {
+        books: query.map((book) => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher,
+        })),
+      },
+    });
+    res.code(200);
+    return res;
+  }
+
+  if (reading) {
+    const query = books.filter(
+      (book) => Number(book.reading) === Number(reading)
+    );
+    const res = h.response({
+      status: "success",
+      data: {
+        books: query.map((book) => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher,
+        })),
+      },
+    });
+    res.code(200);
+    return res;
+  }
+  if (finished) {
+    const query = books.filter(
+      (book) => Number(book.finished) === Number(finished)
+    );
+    const res = h.response({
+      status: "success",
+      data: {
+        books: query.map((book) => ({
+          id: book.id,
+          name: book.name,
+          publisher: book.publisher,
+        })),
+      },
+    });
+    res.code(200);
+    return res;
+  }
+
   const res = h.response({
     status: "success",
     data: {
@@ -97,7 +152,7 @@ const getAllBookHandler = (req, h) => {
 
 const getDetailBookHandler = (req, h) => {
   const { bookId } = req.params;
-  const book = books.filter((book) => book.id === bookId)[0];
+  const book = books.filter((b) => b.id === bookId)[0];
   if (book !== undefined) {
     const res = h.response({
       status: "success",
