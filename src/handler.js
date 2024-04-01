@@ -95,4 +95,30 @@ const getAllBookHandler = (req, h) => {
   return res;
 };
 
-module.exports = { errorPathHandler, addBookHandler, getAllBookHandler };
+const getDetailBookHandler = (req, h) => {
+  const { bookId } = req.params;
+  const book = books.filter((book) => book.id === bookId)[0];
+  if (book !== undefined) {
+    const res = h.response({
+      status: "success",
+      data: {
+        book,
+      },
+    });
+    res.code(200);
+    return res;
+  }
+  const res = h.response({
+    status: "fail",
+    message: "Buku tidak ditemukan",
+  });
+  res.code(404);
+  return res;
+};
+
+module.exports = {
+  errorPathHandler,
+  addBookHandler,
+  getAllBookHandler,
+  getDetailBookHandler,
+};
