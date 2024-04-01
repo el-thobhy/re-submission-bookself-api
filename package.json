@@ -1,5 +1,5 @@
 {
-  "name": "re-submission-bookself-api",
+  "name": "submission",
   "version": "1.0.0",
   "description": "aplikasi back-end penyimpan buku dan pengelolaan bacaan, seperti perpustakaan",
   "main": "index.js",
