@@ -1,8 +1,10 @@
+const { errorPathHandler } = require("./handler");
+
 const routes = [
   {
     method: "*",
-    path: "/{any*}",
-    handler: () => "Halaman tidak ditemukan",
+    path: "/{pathInp*}",
+    handler: errorPathHandler,
   },
 ];
 
